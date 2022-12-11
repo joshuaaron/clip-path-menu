@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla&family=Fira+Code&family=Unbounded:wght@400;500&display=swap');
+
+:root {
+    --mobile-nav: #121520;
+    --container: #eaeaea;
+    --navbar: linear-gradient(65deg, #8d74da, #3cb4d8);
+}
+
+.container {
+    margin-inline: max(1px, ((100% - 240px) / 2));
+    position: relative;
+    background: var(--container);
+    height: 450px;
+    border-radius: 6px;
+}
+
+.site-nav {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    background: var(--navbar);
+    height: 70px;
+    position: relative;
+    padding: 0 1rem;
+    border-radius: 6px 6px 0 0;
+}
+
+.toggle {
+    width: 24px;
+    aspect-ratio: 1 / 1;
+    position: relative;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    outline: none;
+}
+
+.primary-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--mobile-nav);
+    transition: clip-path ease-in-out 500ms;
+    border-radius: 0 0 0 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    [data-state='closed'] & {
+        display: none;
+    }
+    [data-state='closing'] & {
+        animation: closeMenu 450ms ease-out forwards;
+    }
+    [data-state='open'] & {
+        animation: openMenu 450ms ease-out forwards;
+    }
+}
+
+@keyframes openMenu {
+    0% {
+        clip-path: circle(0% at top right);
+    }
+    100% {
+        clip-path: circle(200% at top right);
+    }
+}
+
+@keyframes closeMenu {
+    0% {
+        clip-path: circle(200% at top right);
+    }
+    100% {
+        clip-path: circle(0% at top right);
+    }
+}
+
+li {
+    display: flex;
+    align-items: center;
+    padding: 1.25rem 2rem;
+    color: white;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid rgb(235 235 235 / 0.3);
+    }
+}
+
+[data-state='open'] .hamburger {
+    transform: rotate(45deg);
+
+    &::before {
+        opacity: 0;
+    }
+    &::after {
+        transform: translateY(0px) rotate(-90deg);
+    }
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    font-size: 1.5em;
+    margin-right: 0.75em;
+    width: 1.1em;
+    text-align: right;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    position: absolute;
+    display: block;
+    content: '';
+    background: white;
+    height: 3px;
+    width: 1.75rem;
+    border-radius: 3px;
+    transition: all ease-out 300ms;
+}
+
+.hamburger::before {
+    transform: translateY(-8px);
+}
+
+.hamburger::after {
+    transform: translateY(8px);
+}
+
+body {
+    background: #131126;
+    padding: 2rem 0;
+    font-family: 'Karla', arial;
+}
+
+li:nth-child(1) .icon {
+    color: #72ddf7;
+}
+li:nth-child(2) .icon {
+    color: #8093f1;
+}
+li:nth-child(3) .icon {
+    color: #b388eb;
+}
+li:nth-child(4) .icon {
+    color: #f7aef8;
+}
+
+// Resets & non important
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+*:where(:not(iframe, canvas, img, svg, video):not(svg *)) {
+    all: unset;
+    display: revert;
+}
+
+img {
+    max-width: 100%;
+}
+
+ol,
+ul,
+menu {
+    list-style: none;
+}
